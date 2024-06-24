@@ -1,0 +1,22 @@
+version: "1.0"
+
+services:
+  nginx:
+    build: requirements/nginx/.
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      - wordpress
+  wordpress:
+    build: requirements/wordpress/.
+    container_name: wordpress
+    volumes:
+      - ./web:/var/www/html
+    depends_on:
+      - mariadb
+  mariadb:
+    build: requirements/mariadb/.
+    container_name: mariadb
