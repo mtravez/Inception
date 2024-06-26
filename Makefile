@@ -27,8 +27,9 @@ clean:
 		docker system prune -a -f
 
 re:
-		rm -rf ./srcs/web
 		docker-compose -f $(COMPOSE) down
+		rm -rf ./srcs/web
+		rm -rf ./srcs/database
 		docker system prune -a -f
 		docker-compose -f $(COMPOSE) up -d
 logs:
@@ -41,6 +42,7 @@ status:
 
 fclean: down clean
 		rm -rf ./srcs/web
+		rm -rf ./srcs/database
 	
 
 all: build up

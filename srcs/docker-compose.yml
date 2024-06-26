@@ -1,9 +1,25 @@
 version: "3.8"
 
+# volumes:
+#   wordpress:
+#     name: wordpress
+#     driver: local
+#     driver_opts:
+#       device: /goinfre/$USER/wordpress
+#       o: bind
+#       type: none
+#   mariadb:
+#     name: mariadb
+#     driver: local
+#     driver_opts:
+#       device: /goinfre/$USER/mariadb
+#       o: bind
+#       type: none
+
 services:
   nginx:
-    build: requirements/nginx/.
     container_name: nginx
+    build: requirements/nginx/.
     ports:
       - "443:443"
     volumes:
@@ -12,25 +28,35 @@ services:
       - wordpress
       - mariadb
     networks:
-      inception:
-    restart: always
+      - inception
+    restart: on-failure
+  
   wordpress:
-    build: requirements/wordpress/.
     container_name: wordpress
+    build: requirements/wordpress/.
+    env_file:
+      - .env
     volumes:
       - ./web:/var/www/html
     depends_on:
       - mariadb
     networks:
-      inception:
-    restart: always
+      - inception
+    expose:
+      - "9000"
+    restart: on-failure
+  
   mariadb:
-    build: requirements/mariadb/.
     container_name: mariadb
+    build: requirements/mariadb/.
+    env_file:
+      - .env
     volumes:
       - ./database:/var/lib/mysql
     networks:
-      inception:
+      - inception
+    restart: unless-stopped
 
 networks:
   inception:
+    driver: bridge
