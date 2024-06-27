@@ -12,7 +12,7 @@ curl
 # RUN chown -R root:root /var/www/wordpress
 
 COPY conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
-COPY conf/script.sh .
+COPY tools/script.sh .
 
 RUN mkdir -p /run/php/ /var/www/html
 RUN chmod 755 /var/www/html
@@ -21,4 +21,4 @@ EXPOSE 9000
 
 RUN chmod +x script.sh
 RUN chown -R www-data:www-data /var/www/html
-ENTRYPOINT [ "./script.sh"]
+CMD [ "./script.sh"]

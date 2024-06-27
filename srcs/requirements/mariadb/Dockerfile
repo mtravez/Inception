@@ -9,7 +9,7 @@ RUN chmod 777 /var/lib/mysql
 
 COPY conf/50-server.cnf	/etc/mysql/mariadb.conf.d/
 # COPY conf/init.sql /etc/mysql/init.sql
-COPY conf/script.sh .
+COPY tools/script.sh .
 
 RUN chmod +x script.sh
 
