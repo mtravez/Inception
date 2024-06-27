@@ -34,8 +34,8 @@ clean:
 		docker system prune -a -f
 
 fclean: down clean
-		@rm -rf $(WEB_VOLUME)/*
-		@rm -rf $(DB_VOLUME)/*
+		@sudo rm -rf $(WEB_VOLUME)/*
+		@sudo rm -rf $(DB_VOLUME)/*
 		@docker volume rm mariadb wordpress
 
 re: fclean
