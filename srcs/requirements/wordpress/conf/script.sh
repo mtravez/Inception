@@ -2,12 +2,9 @@
 
 set -e 
 
-cd /var/www/html
+sleep 3
 
-# Ensure the PHP run directory exists
-if [ ! -d /run/php ]; then
-    mkdir /run/php
-fi
+cd /var/www/html
 
 # Ensure wp-cli is installed
 if [ ! -f /usr/local/bin/wp ]; then

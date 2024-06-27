@@ -20,8 +20,6 @@ mariadb-install-db
 
 exec mariadbd --user=mysql --datadir=/var/lib/mysql
 
-mysqld
-
 # mysql_install_db
 
 

@@ -1,20 +1,21 @@
 version: "3.8"
 
-# volumes:
-#   wordpress:
-#     name: wordpress
-#     driver: local
-#     driver_opts:
-#       device: /goinfre/$USER/wordpress
-#       o: bind
-#       type: none
-#   mariadb:
-#     name: mariadb
-#     driver: local
-#     driver_opts:
-#       device: /goinfre/$USER/mariadb
-#       o: bind
-#       type: none
+
+volumes:
+  wordpress:
+    name: wordpress
+    driver: local
+    driver_opts:
+      device: /home/mtravez/data/web
+      o: bind
+      type: none
+  mariadb:
+    name: mariadb
+    driver: local
+    driver_opts:
+      device: /home/mtravez/data/database
+      o: bind
+      type: none
 
 services:
   nginx:
@@ -23,7 +24,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./web:/var/www/html
+      - wordpress:/var/www/html
     depends_on:
       - wordpress
       - mariadb
@@ -37,7 +38,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./web:/var/www/html
+      - wordpress:/var/www/html
     depends_on:
       - mariadb
     networks:
@@ -52,7 +53,7 @@ services:
     env_file:
       - .env
     volumes:
-      - ./database:/var/lib/mysql
+      - mariadb:/var/lib/mysql
     networks:
       - inception
     restart: unless-stopped
@@ -60,3 +61,4 @@ services:
 networks:
   inception:
     driver: bridge
+
