@@ -7,9 +7,12 @@ COMPOSE := srcs/docker-compose.yml
 DB_VOLUME := /home/mtravez/data/database
 WEB_VOLUME := /home/mtravez/data/web
 
-all: build up
+all: setenv build up
+
+setenv:
 		@if [ ! -f srcs/.env ]; then
 			mv /home/mtravez/resources/.env srcs/.env;
+	
 
 build:
 		@echo "Building $(NAME)..."
