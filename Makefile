@@ -8,6 +8,8 @@ DB_VOLUME := /home/mtravez/data/database
 WEB_VOLUME := /home/mtravez/data/web
 
 all: build up
+		@if [ ! -f srcs/.env ]; then
+			mv /home/mtravez/resources/.env srcs/.env;
 
 build:
 		@echo "Building $(NAME)..."
@@ -49,4 +51,4 @@ status:
 		@echo "Displaying status of Docker containers for $(NAME)..."
 		$(DOCKER_COMPOSE) -f $(COMPOSE) ps
 
-.PHONY : build up down start stop logs status fclean all
+.PHONY : build up down start stop clean fclean logs status all
