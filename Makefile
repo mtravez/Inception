@@ -10,7 +10,7 @@ WEB_VOLUME := /home/mtravez/data/web
 all: setenv build up
 
 setenv:
-		@if [ ! -f srcs/.env ]; then /
+		@if [ ! -f srcs/.env ]; then \
 			mv /home/mtravez/resources/.env srcs/.env;
 		fi
 
