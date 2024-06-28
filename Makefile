@@ -11,7 +11,7 @@ all: setenv build up
 
 setenv:
 		@if [ ! -f srcs/.env ]; then \
-			mv /home/mtravez/resources/.env srcs/.env; \
+			cp /home/mtravez/resources/.env srcs/.env; \
 		fi
 
 build:
