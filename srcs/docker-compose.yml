@@ -30,7 +30,7 @@ services:
       - mariadb
     networks:
       - inception
-    restart: on-failure
+    restart: always
   
   wordpress:
     container_name: wordpress
@@ -45,7 +45,7 @@ services:
       - inception
     expose:
       - "9000"
-    restart: on-failure
+    restart: always
   
   mariadb:
     container_name: mariadb
@@ -56,7 +56,7 @@ services:
       - mariadb:/var/lib/mysql
     networks:
       - inception
-    restart: unless-stopped
+    restart: always
 
 networks:
   inception:
